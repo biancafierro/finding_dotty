@@ -42,14 +42,20 @@ let player1: game.LedSprite = null
 let countP2 = 0
 let countP1 = 0
 let dice = 0
+while (input.temperature() >= 32 && input.temperature() <= 40) {
+    basic.showString("NO GAME")
+}
+while (input.temperature() <= -10) {
+    basic.showString("NO GAME")
+}
 for (let index = 0; index < 3; index++) {
     dice = randint(1, 6)
     countP1 = 0
     countP2 = 0
     if (dice % 2 == 0) {
-        countP1 += 1
+        countP1 = countP1 + 1
     } else {
-        countP1 += 1
+        countP2 = countP2 + 1
     }
 }
 basic.showString("P1")
@@ -65,8 +71,7 @@ if (countP1 > countP2) {
 }
 basic.clearScreen()
 let counter = 4
-while (counter >= 2) {
-    counter += -1
+for (let counter = 0; counter <= 3; counter++) {
     basic.showNumber(counter)
 }
 player1 = game.createSprite(4, 4)
@@ -77,6 +82,7 @@ basic.forever(function () {
         yP1 += 1
         xP1 += 1
         for (let index = 0; index < 4; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
                 . . . . #
                 . . . # .
@@ -99,6 +105,7 @@ basic.forever(function () {
         yP2 += 1
         xP2 += 1
         for (let index = 0; index < 4; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
                 . . . . #
                 . . . # .
@@ -125,6 +132,7 @@ basic.forever(function () {
         xP1 += 1
         xP2 += 1
         for (let index = 0; index < 4; index++) {
+            music.playMelody("- A G F E D C - ", 120)
             basic.showLeds(`
                 # . . . #
                 . # . # .
@@ -150,6 +158,7 @@ basic.forever(function () {
         yP1 += -1
         xP1 += -1
         for (let index = 0; index < 4; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
                 . # . # .
                 . # # # .
@@ -172,6 +181,7 @@ basic.forever(function () {
         yP2 += -1
         xP2 += -1
         for (let index = 0; index < 4; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
                 . # . # .
                 . # # # .
