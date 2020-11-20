@@ -1,51 +1,67 @@
 input.onButtonPressed(Button.A, function () {
-    diceP1 = randint(1, 3)
-    xP1 = 4
-    yP1 = 4
-    if (diceP1 == 1) {
-        xP1 += -1
-        player1 = game.createSprite(xP1, yP1)
-    } else if (diceP1 == 2) {
-        xP1 += -2
-        player1 = game.createSprite(xP1, yP1)
-    } else if (diceP1 == 3) {
-        xP1 += -3
-        player1 = game.createSprite(xP1, yP1)
+    basic.pause(100)
+    diceP1 = randint(2, 3)
+    basic.showNumber(diceP1)
+    for (let index = 0; index <= diceP1 - 1; index++) {
+        if (player1.get(LedSpriteProperty.Y) % 2 == 0) {
+            player1.change(LedSpriteProperty.X, -1)
+            basic.pause(100)
+            if (player1.get(LedSpriteProperty.X) == 0 && diceP1 != 1) {
+                player1.change(LedSpriteProperty.Y, -1)
+                diceP1 += -1
+                basic.pause(100)
+            }
+        } else if (player1.get(LedSpriteProperty.Y) % 2 != 0) {
+            player1.change(LedSpriteProperty.X, 1)
+            basic.pause(100)
+            if (player1.get(LedSpriteProperty.X) == 4) {
+                player1.change(LedSpriteProperty.Y, -1)
+                diceP1 += -1
+                basic.pause(100)
+            }
+        }
     }
 })
 input.onButtonPressed(Button.B, function () {
-    diceP2 = randint(1, 3)
-    xP2 = 4
-    yP2 = 4
-    if (diceP2 == 1) {
-        xP2 += -1
-        player2 = game.createSprite(xP2, yP2)
-    } else if (diceP2 == 2) {
-        xP2 += -2
-        player2 = game.createSprite(xP2, yP2)
-    } else if (diceP2 == 3) {
-        xP2 += -3
-        player2 = game.createSprite(xP2, yP2)
+    basic.pause(100)
+    diceP2 = randint(2, 3)
+    basic.showNumber(diceP2)
+    for (let index = 0; index <= diceP2 - 1; index++) {
+        if (player2.get(LedSpriteProperty.Y) % 2 == 0) {
+            player2.change(LedSpriteProperty.X, -1)
+            basic.pause(100)
+            if (player2.get(LedSpriteProperty.X) == 0 && diceP2 != 1) {
+                player2.change(LedSpriteProperty.Y, -1)
+                diceP2 += -1
+                basic.pause(100)
+            }
+        } else if (player2.get(LedSpriteProperty.Y) % 2 != 0) {
+            player2.change(LedSpriteProperty.X, 1)
+            basic.pause(100)
+            if (player2.get(LedSpriteProperty.X) == 4) {
+                player2.change(LedSpriteProperty.Y, -1)
+                diceP2 += -1
+                basic.pause(100)
+            }
+        }
     }
 })
+let end: game.LedSprite = null
 let ladder: game.LedSprite = null
 let snakeSpecial: game.LedSprite = null
 let snake: game.LedSprite = null
-let yP2 = 0
-let xP2 = 0
 let diceP2 = 0
-let yP1 = 0
-let xP1 = 0
 let diceP1 = 0
 let player2: game.LedSprite = null
 let player1: game.LedSprite = null
 let countP2 = 0
 let countP1 = 0
 let dice = 0
-while (input.temperature() >= 32 && input.temperature() <= 40) {
+let temperature = input.temperature()
+while (temperature >= 32 && temperature <= 40) {
     basic.showString("NO GAME")
 }
-while (input.temperature() <= -10) {
+while (temperature <= -10) {
     basic.showString("NO GAME")
 }
 for (let index = 0; index < 3; index++) {
@@ -78,9 +94,7 @@ player1 = game.createSprite(4, 4)
 player2 = game.createSprite(4, 4)
 basic.forever(function () {
     snake = game.createSprite(2, 2)
-    if (player1 == snake) {
-        yP1 += 1
-        xP1 += 1
+    if (player1.isTouching(snake)) {
         for (let index = 0; index < 4; index++) {
             music.playTone(147, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
@@ -100,10 +114,9 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
-        player1 = game.createSprite(xP1, yP1)
-    } else if (player2 == snake) {
-        yP2 += 1
-        xP2 += 1
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+    } else if (player2.isTouching(snake)) {
         for (let index = 0; index < 4; index++) {
             music.playTone(147, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
@@ -123,14 +136,11 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
-        player2 = game.createSprite(xP2, yP2)
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
     }
     snakeSpecial = game.createSprite(1, 0)
-    if (player1 == snakeSpecial || player2 == snakeSpecial) {
-        yP1 += 1
-        yP2 += 1
-        xP1 += 1
-        xP2 += 1
+    if (player1.isTouching(snakeSpecial) || player2.isTouching(snakeSpecial)) {
         for (let index = 0; index < 4; index++) {
             music.playMelody("- A G F E D C - ", 120)
             basic.showLeds(`
@@ -150,13 +160,13 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
-        player1 = game.createSprite(xP1, yP1)
-        player2 = game.createSprite(xP1, yP1)
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
     }
     ladder = game.createSprite(3, 3)
-    if (player1 == ladder) {
-        yP1 += -1
-        xP1 += -1
+    if (player1.isTouching(ladder)) {
         for (let index = 0; index < 4; index++) {
             music.playTone(740, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
@@ -176,10 +186,9 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
-        player1 = game.createSprite(xP1, yP1)
-    } else if (player2 == ladder) {
-        yP2 += -1
-        xP2 += -1
+        player1.change(LedSpriteProperty.X, -1)
+        player1.change(LedSpriteProperty.Y, -1)
+    } else if (player2.isTouching(ladder)) {
         for (let index = 0; index < 4; index++) {
             music.playTone(740, music.beat(BeatFraction.Quarter))
             basic.showLeds(`
@@ -199,6 +208,11 @@ basic.forever(function () {
                 `)
             basic.pause(100)
         }
-        player2 = game.createSprite(xP2, yP2)
+        player2.change(LedSpriteProperty.X, -1)
+        player2.change(LedSpriteProperty.Y, -1)
+    }
+    end = game.createSprite(0, 0)
+    while (player1.isTouching(end)) {
+    	
     }
 })
