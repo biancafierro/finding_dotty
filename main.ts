@@ -4,52 +4,279 @@ input.onButtonPressed(Button.A, function () {
     basic.showNumber(diceP1)
     for (let index = 0; index <= diceP1 - 1; index++) {
         if (player1.get(LedSpriteProperty.Y) % 2 == 0) {
-            player1.change(LedSpriteProperty.X, -1)
-            basic.pause(100)
             if (player1.get(LedSpriteProperty.X) == 0 && diceP1 != 1) {
                 player1.change(LedSpriteProperty.Y, -1)
-                diceP1 += -1
+                basic.pause(100)
+            } else {
+                player1.change(LedSpriteProperty.X, -1)
                 basic.pause(100)
             }
         } else if (player1.get(LedSpriteProperty.Y) % 2 != 0) {
-            player1.change(LedSpriteProperty.X, 1)
-            basic.pause(100)
             if (player1.get(LedSpriteProperty.X) == 4) {
                 player1.change(LedSpriteProperty.Y, -1)
-                diceP1 += -1
+                basic.pause(100)
+            } else {
+                player1.change(LedSpriteProperty.X, 1)
                 basic.pause(100)
             }
         }
+    }
+    if (player1.get(LedSpriteProperty.X) == 3 && player1.get(LedSpriteProperty.Y) == 1) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . . . . #
+                . . . # .
+                . . . # .
+                . # # . .
+                # . . . .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . . . . #
+                . . . . #
+                . . # # .
+                . # . . .
+                # . . . .
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+    } else if (player2.get(LedSpriteProperty.X) == 3 && player2.get(LedSpriteProperty.Y) == 1) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . . . . #
+                . . . # .
+                . . . # .
+                . # # . .
+                # . . . .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . . . . #
+                . . . . #
+                . . # # .
+                . # . . .
+                # . . . .
+                `)
+            basic.pause(100)
+        }
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
+    }
+    if (player1.get(LedSpriteProperty.X) == 1 && player1.get(LedSpriteProperty.Y) == 0 || player2.get(LedSpriteProperty.X) == 1 && player2.get(LedSpriteProperty.Y) == 0) {
+        for (let index = 0; index < 2; index++) {
+            music.playMelody("C5 A B G A F G E ", 120)
+            basic.showLeds(`
+                # . . . #
+                . # . # .
+                . # . # .
+                . # # # .
+                # . . . #
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                # . . . #
+                # . . . #
+                . # # # .
+                . # . # .
+                # . . . #
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
+    }
+    if (player1.get(LedSpriteProperty.X) == 3 && player1.get(LedSpriteProperty.Y) == 3) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, -1)
+        player1.change(LedSpriteProperty.Y, -1)
+    } else if (player2.get(LedSpriteProperty.X) == 3 && player2.get(LedSpriteProperty.Y) == 3) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                `)
+            basic.pause(100)
+        }
+        player2.change(LedSpriteProperty.X, -1)
+        player2.change(LedSpriteProperty.Y, -1)
     }
 })
 input.onButtonPressed(Button.B, function () {
     basic.pause(100)
     diceP2 = randint(2, 3)
     basic.showNumber(diceP2)
-    for (let index = 0; index <= diceP2 - 1; index++) {
+    for (let index2 = 0; index2 <= diceP2 - 1; index2++) {
         if (player2.get(LedSpriteProperty.Y) % 2 == 0) {
-            player2.change(LedSpriteProperty.X, -1)
-            basic.pause(100)
             if (player2.get(LedSpriteProperty.X) == 0 && diceP2 != 1) {
                 player2.change(LedSpriteProperty.Y, -1)
-                diceP2 += -1
+                basic.pause(100)
+            } else {
+                player2.change(LedSpriteProperty.X, -1)
                 basic.pause(100)
             }
         } else if (player2.get(LedSpriteProperty.Y) % 2 != 0) {
-            player2.change(LedSpriteProperty.X, 1)
-            basic.pause(100)
             if (player2.get(LedSpriteProperty.X) == 4) {
                 player2.change(LedSpriteProperty.Y, -1)
-                diceP2 += -1
+                basic.pause(100)
+            } else {
+                player2.change(LedSpriteProperty.X, 1)
                 basic.pause(100)
             }
         }
     }
+    if (player1.get(LedSpriteProperty.X) == 3 && player1.get(LedSpriteProperty.Y) == 1) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . . . . #
+                . . . # .
+                . . . # .
+                . # # . .
+                # . . . .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . . . . #
+                . . . . #
+                . . # # .
+                . # . . .
+                # . . . .
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+    } else if (player2.get(LedSpriteProperty.X) == 3 && player2.get(LedSpriteProperty.Y) == 1) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(147, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . . . . #
+                . . . # .
+                . . . # .
+                . # # . .
+                # . . . .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . . . . #
+                . . . . #
+                . . # # .
+                . # . . .
+                # . . . .
+                `)
+            basic.pause(100)
+        }
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
+    }
+    if (player1.get(LedSpriteProperty.X) == 1 && player1.get(LedSpriteProperty.Y) == 0 || player2.get(LedSpriteProperty.X) == 1 && player2.get(LedSpriteProperty.Y) == 0) {
+        for (let index = 0; index < 2; index++) {
+            music.playMelody("C5 A B G A F G E ", 120)
+            basic.showLeds(`
+                # . . . #
+                . # . # .
+                . # . # .
+                . # # # .
+                # . . . #
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                # . . . #
+                # . . . #
+                . # # # .
+                . # . # .
+                # . . . #
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, 1)
+        player1.change(LedSpriteProperty.Y, 1)
+        player2.change(LedSpriteProperty.X, 1)
+        player2.change(LedSpriteProperty.Y, 1)
+    }
+    if (player1.get(LedSpriteProperty.X) == 3 && player1.get(LedSpriteProperty.Y) == 3) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                `)
+            basic.pause(100)
+        }
+        player1.change(LedSpriteProperty.X, -1)
+        player1.change(LedSpriteProperty.Y, -1)
+    } else if (player2.get(LedSpriteProperty.X) == 3 && player2.get(LedSpriteProperty.Y) == 3) {
+        for (let index = 0; index < 2; index++) {
+            music.playTone(740, music.beat(BeatFraction.Quarter))
+            basic.showLeds(`
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                `)
+            basic.pause(100)
+            basic.showLeds(`
+                . # # # .
+                . # . # .
+                . # # # .
+                . # . # .
+                . # # # .
+                `)
+            basic.pause(100)
+        }
+        player2.change(LedSpriteProperty.X, -1)
+        player2.change(LedSpriteProperty.Y, -1)
+    }
 })
-let end: game.LedSprite = null
-let ladder: game.LedSprite = null
-let snakeSpecial: game.LedSprite = null
-let snake: game.LedSprite = null
+let win: Image = null
 let diceP2 = 0
 let diceP1 = 0
 let player2: game.LedSprite = null
@@ -92,127 +319,33 @@ for (let counter = 0; counter <= 3; counter++) {
 }
 player1 = game.createSprite(4, 4)
 player2 = game.createSprite(4, 4)
+let snake = game.createSprite(3, 1)
+let snakeSpecial = game.createSprite(1, 0)
+let ladder = game.createSprite(3, 3)
+let end = game.createSprite(0, 0)
 basic.forever(function () {
-    snake = game.createSprite(2, 2)
-    if (player1.isTouching(snake)) {
-        for (let index = 0; index < 4; index++) {
-            music.playTone(147, music.beat(BeatFraction.Quarter))
-            basic.showLeds(`
-                . . . . #
-                . . . # .
-                . . . # .
-                . # # . .
-                # . . . .
-                `)
-            basic.pause(100)
-            basic.showLeds(`
-                . . . . #
-                . . . . #
-                . . # # .
-                . # . . .
-                # . . . .
-                `)
-            basic.pause(100)
-        }
-        player1.change(LedSpriteProperty.X, 1)
-        player1.change(LedSpriteProperty.Y, 1)
-    } else if (player2.isTouching(snake)) {
-        for (let index = 0; index < 4; index++) {
-            music.playTone(147, music.beat(BeatFraction.Quarter))
-            basic.showLeds(`
-                . . . . #
-                . . . # .
-                . . . # .
-                . # # . .
-                # . . . .
-                `)
-            basic.pause(100)
-            basic.showLeds(`
-                . . . . #
-                . . . . #
-                . . # # .
-                . # . . .
-                # . . . .
-                `)
-            basic.pause(100)
-        }
-        player2.change(LedSpriteProperty.X, 1)
-        player2.change(LedSpriteProperty.Y, 1)
-    }
-    snakeSpecial = game.createSprite(1, 0)
-    if (player1.isTouching(snakeSpecial) || player2.isTouching(snakeSpecial)) {
-        for (let index = 0; index < 4; index++) {
-            music.playMelody("- A G F E D C - ", 120)
-            basic.showLeds(`
-                # . . . #
-                . # . # .
-                . # . # .
-                . # # # .
-                # . . . #
-                `)
-            basic.pause(100)
-            basic.showLeds(`
-                # . . . #
-                # . . . #
-                . # # # .
-                . # . # .
-                # . . . #
-                `)
-            basic.pause(100)
-        }
-        player1.change(LedSpriteProperty.X, 1)
-        player1.change(LedSpriteProperty.Y, 1)
-        player2.change(LedSpriteProperty.X, 1)
-        player2.change(LedSpriteProperty.Y, 1)
-    }
-    ladder = game.createSprite(3, 3)
-    if (player1.isTouching(ladder)) {
-        for (let index = 0; index < 4; index++) {
-            music.playTone(740, music.beat(BeatFraction.Quarter))
-            basic.showLeds(`
-                . # . # .
-                . # # # .
-                . # . # .
-                . # # # .
-                . # . # .
-                `)
-            basic.pause(100)
-            basic.showLeds(`
-                . # # # .
-                . # . # .
-                . # # # .
-                . # . # .
-                . # # # .
-                `)
-            basic.pause(100)
-        }
-        player1.change(LedSpriteProperty.X, -1)
-        player1.change(LedSpriteProperty.Y, -1)
-    } else if (player2.isTouching(ladder)) {
-        for (let index = 0; index < 4; index++) {
-            music.playTone(740, music.beat(BeatFraction.Quarter))
-            basic.showLeds(`
-                . # . # .
-                . # # # .
-                . # . # .
-                . # # # .
-                . # . # .
-                `)
-            basic.pause(100)
-            basic.showLeds(`
-                . # # # .
-                . # . # .
-                . # # # .
-                . # . # .
-                . # # # .
-                `)
-            basic.pause(100)
-        }
-        player2.change(LedSpriteProperty.X, -1)
-        player2.change(LedSpriteProperty.Y, -1)
-    }
-    end = game.createSprite(0, 0)
     while (player1.isTouching(end)) {
-    	
+        music.playMelody("- - G A A B C5 - ", 120)
+        win = images.createImage(`
+            . . . . .
+            . # . # .
+            # . # . #
+            . # . # .
+            . . # . .
+            `)
+        music.playTone(698, music.beat(BeatFraction.Whole))
+        basic.showString("P1 WINS")
+    }
+    while (player2.isTouching(end)) {
+        music.playMelody("- - G A A B C5 - ", 120)
+        win = images.createImage(`
+            . . . . .
+            . # . # .
+            # . # . #
+            . # . # .
+            . . # . .
+            `)
+        music.playTone(698, music.beat(BeatFraction.Whole))
+        basic.showString("P2 WINS!")
     }
 })
